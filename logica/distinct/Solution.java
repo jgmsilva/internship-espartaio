@@ -7,7 +7,7 @@ public class Solution{
          length = insert(distincts, length, A[i]);
       }
      }
-     return distincts.length;
+     return length;
    }
    private static boolean in(int[] vector, int value){
       for (int v : vector) {
