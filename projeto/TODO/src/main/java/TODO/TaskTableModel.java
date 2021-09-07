@@ -12,7 +12,7 @@ public class TaskTableModel extends AbstractTableModel {
     private List<Task> tasks;
     
     public TaskTableModel(){
-        columns = new String[]{ "Tarefa", "Selecionada"};
+        columns = new String[]{ "Tarefa", "Status", "Selecionada"};
         tasks = new ArrayList<>();
     }
 
@@ -33,30 +33,37 @@ public class TaskTableModel extends AbstractTableModel {
     
     @Override
     public Class<?> getColumnClass​(int columnIndex){
-        if(columnIndex == 0){
-            return String.class;
-        }else{
+        if(columnIndex == 2){
             return Boolean.class;
+        }else{
+            return String.class;
         }
     }
 
     @Override
     public Object getValueAt(int row, int column) {
         Task task = tasks.get(row);
-        return column == 1 ? task.isSelected() : task.getDescription();
-    }
-    
-    @Override
-    public void setValueAt(Object aValue, int row, int column){
-        if(isCellEditable(row, column)){
-            Task task = tasks.get(row);
-            task.setSelected(!task.isSelected());
+        switch(column){
+            case 0: return task.getDescription();
+            case 1: return task.getFinished();
+            case 2: return task.isSelected();
+            default: return null;
         }
     }
     
     @Override
+    public void setValueAt(Object aValue, int row, int column){
+        Task task = tasks.get(row);
+        switch(column){
+            case 1: task.setFinished((boolean)aValue);
+            case 2: task.setSelected(!task.isSelected());
+        }
+        
+    }
+    
+    @Override
     public boolean isCellEditable(int row, int column){
-        return column==1;
+        return column==2;
     }
     
     public void addRow(String description){
