@@ -1,21 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package TODO;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.List;
+import java.util.ArrayList;
 
-/**
- *
- * @author joao
- */
+
 public class TaskTableModel extends AbstractTableModel {
     
     private String[] columns;
     private List<Task> tasks;
+    
+    public TaskTableModel(){
+        columns = new String[]{ "Tarefa", "Selecionada"};
+        tasks = new ArrayList<>();
+    }
 
     @Override
     public int getRowCount() {
