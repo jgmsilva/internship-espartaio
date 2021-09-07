@@ -30,11 +30,28 @@ public class TaskTableModel extends AbstractTableModel {
     public String getColumnName(int column){
         return columns[column];
     }
+    
+    @Override
+    public Class<?> getColumnClass​(int columnIndex){
+        if(columnIndex == 0){
+            return String.class;
+        }else{
+            return Boolean.class;
+        }
+    }
 
     @Override
     public Object getValueAt(int row, int column) {
         Task task = tasks.get(row);
         return column == 1 ? task.isSelected() : task.getDescription();
+    }
+    
+    @Override
+    public void setValueAt(Object aValue, int row, int column){
+        if(isCellEditable(row, column)){
+            Task task = tasks.get(row);
+            task.setSelected(!task.isSelected());
+        }
     }
     
     @Override
