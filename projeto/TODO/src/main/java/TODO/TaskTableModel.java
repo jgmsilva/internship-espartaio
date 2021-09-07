@@ -25,6 +25,11 @@ public class TaskTableModel extends AbstractTableModel {
     public int getColumnCount() {
         return columns.length;
     }
+    
+    @Override
+    public String getColumnName(int column){
+        return columns[column];
+    }
 
     @Override
     public Object getValueAt(int row, int column) {
@@ -35,6 +40,11 @@ public class TaskTableModel extends AbstractTableModel {
     @Override
     public boolean isCellEditable(int row, int column){
         return column==1;
+    }
+    
+    public void addRow(String description){
+        tasks.add(new Task(description));
+        fireTableRowsInserted(tasks.size()-1, tasks.size()-1);
     }
     
 }
