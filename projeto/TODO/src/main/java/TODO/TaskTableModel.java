@@ -28,7 +28,8 @@ public class TaskTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int row, int column) {
-        
+        Task task = tasks.get(row);
+        return column == 1 ? task.isSelected() : task.getDescription();
     }
     
     @Override
