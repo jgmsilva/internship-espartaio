@@ -71,4 +71,13 @@ public class TaskTableModel extends AbstractTableModel {
         fireTableRowsInserted(tasks.size()-1, tasks.size()-1);
     }
     
+    public void removeSelectedRows(){
+        for(int i=0; i < tasks.size(); i++){
+            if(tasks.get(i).isSelected()){
+                tasks.remove(i);
+                i--;
+            }
+        }
+        fireTableDataChanged();
+    }
 }

@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package TODO;
+import javax.swing.JOptionPane;
 import javax.swing.table.TableRowSorter;
 import javax.swing.RowFilter;
 /**
@@ -125,7 +126,19 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_tableModeActionPerformed
 
     private void deleteTaskButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteTaskButtonActionPerformed
-        // TODO add your handling code here:
+        Object[] options = {"Cancelar", "Confirmar"};
+        int result = JOptionPane.showOptionDialog(this,
+        "Você quer deletar as tarefas selecionadas?",
+        "Deletar Tarefas",
+        JOptionPane.YES_NO_OPTION,
+        JOptionPane.PLAIN_MESSAGE,
+        null,
+        options,
+        options[1]);
+        if(result == 1){
+            TaskTableModel model = (TaskTableModel) taskTable.getModel();
+            model.removeSelectedRows();
+        }
     }//GEN-LAST:event_deleteTaskButtonActionPerformed
 
     /**
