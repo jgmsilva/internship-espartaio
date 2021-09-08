@@ -1,7 +1,7 @@
 ifeq ($(OS),Windows_NT)
-    RM = cmd //C del //Q //F
+    RM = del /s
 else
-    RM = rm
+    RM = rm -r
 endif
 
 all:
@@ -10,5 +10,5 @@ all:
 
 clean:
 	$(RM) TODO.jar
-	$(RM) TODO/*.class
+	$(RM) *.class
 
