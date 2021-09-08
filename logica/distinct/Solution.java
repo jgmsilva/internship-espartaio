@@ -3,15 +3,15 @@ public class Solution{
      int[] distincts = new int[A.length];
      int length = 0;
      for (int i=0; i < A.length ; i++) {
-       if (!in(distincts, A[i])) {
+       if (!in(distincts, length, A[i])) {
          length = insert(distincts, length, A[i]);
       }
      }
      return length;
    }
-   private static boolean in(int[] vector, int value){
-      for (int v : vector) {
-        if (v == value) {
+   private static boolean in(int[] vector, int length, int value){
+      for (int i=0; i < length; i++) {
+        if (vector[i] == value) {
           return true;
         }
       }
