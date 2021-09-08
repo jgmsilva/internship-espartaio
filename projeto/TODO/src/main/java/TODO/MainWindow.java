@@ -18,6 +18,9 @@ public class MainWindow extends javax.swing.JFrame {
      */
     public MainWindow() {
         initComponents();
+        TableRowSorter<TaskTableModel> filter = new TableRowSorter<>((TaskTableModel)taskTable.getModel());
+        taskTable.setRowSorter(filter);
+        filter.setRowFilter(RowFilter.regexFilter("Pendente"));
     }
 
     /**
@@ -51,6 +54,11 @@ public class MainWindow extends javax.swing.JFrame {
         });
 
         endTaskButton.setText("Finalizar");
+        endTaskButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                endTaskButtonActionPerformed(evt);
+            }
+        });
 
         deleteTaskButton.setText("Excluir");
         deleteTaskButton.addActionListener(new java.awt.event.ActionListener() {
@@ -116,12 +124,19 @@ public class MainWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tableModeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tableModeActionPerformed
-        TableRowSorter<TaskTableModel> filter = new TableRowSorter<>((TaskTableModel)taskTable.getModel());
-        taskTable.setRowSorter(filter);
+        TableRowSorter<TaskTableModel> filter = (TableRowSorter)taskTable.getRowSorter();
         switch(tableMode.getSelectedIndex()){
-            case 0: filter.setRowFilter(RowFilter.regexFilter("Pendente"));break;
-            case 1: filter.setRowFilter(RowFilter.regexFilter("Finalizada"));break;
-            case 2: filter.setRowFilter(null);
+            case 0: 
+                filter.setRowFilter(RowFilter.regexFilter("Pendente"));
+                endTaskButton.setText("Finalizar");
+                break;
+            case 1: 
+                filter.setRowFilter(RowFilter.regexFilter("Finalizada"));
+                endTaskButton.setText("Pendente");
+                break;
+            case 2: 
+                filter.setRowFilter(null);
+                endTaskButton.setText("Finalizar");
         }
     }//GEN-LAST:event_tableModeActionPerformed
 
@@ -140,6 +155,12 @@ public class MainWindow extends javax.swing.JFrame {
             model.removeSelectedRows();
         }
     }//GEN-LAST:event_deleteTaskButtonActionPerformed
+
+    private void endTaskButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_endTaskButtonActionPerformed
+        TaskTableModel model = (TaskTableModel) taskTable.getModel();
+        model.changeStatusSelectedRows(endTaskButton.getText() == "Finalizar");
+        //TableRowSorter<TaskTableModel> filter = taskTable.getRowSorter();
+    }//GEN-LAST:event_endTaskButtonActionPerformed
 
     /**
      * @param args the command line arguments

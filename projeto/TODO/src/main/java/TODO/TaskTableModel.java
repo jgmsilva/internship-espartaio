@@ -80,4 +80,15 @@ public class TaskTableModel extends AbstractTableModel {
         }
         fireTableDataChanged();
     }
+    
+    public void changeStatusSelectedRows(boolean status){
+        for(Task task : tasks){
+            if(task.isSelected()){
+                task.setFinished(status);
+                task.setSelected(false);
+            }
+        }
+        fireTableDataChanged();
+    }
+    
 }
