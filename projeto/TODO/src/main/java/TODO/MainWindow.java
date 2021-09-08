@@ -68,6 +68,11 @@ public class MainWindow extends javax.swing.JFrame {
         });
 
         addTaskButton.setText("Nova Tarefa");
+        addTaskButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addTaskButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -155,6 +160,21 @@ public class MainWindow extends javax.swing.JFrame {
             model.removeSelectedRows();
         }
     }//GEN-LAST:event_deleteTaskButtonActionPerformed
+
+    private void addTaskButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTaskButtonActionPerformed
+        TaskTableModel model = (TaskTableModel) taskTable.getModel();
+        String description = (String)JOptionPane.showInputDialog(
+                    this,
+                    "Escreva uma descrição da tarefa",
+                    "Nova Tarefa",
+                    JOptionPane.PLAIN_MESSAGE,
+                    null,
+                    null,
+                    null);
+        if(description != null){
+            model.addRow(description);
+        }
+    }//GEN-LAST:event_addTaskButtonActionPerformed
 
     private void endTaskButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_endTaskButtonActionPerformed
         TaskTableModel model = (TaskTableModel) taskTable.getModel();
