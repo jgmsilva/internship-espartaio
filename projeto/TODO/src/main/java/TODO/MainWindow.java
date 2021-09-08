@@ -4,7 +4,8 @@
  * and open the template in the editor.
  */
 package TODO;
-
+import javax.swing.table.TableRowSorter;
+import javax.swing.RowFilter;
 /**
  *
  * @author joao
@@ -114,7 +115,13 @@ public class MainWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tableModeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tableModeActionPerformed
-        // TODO add your handling code here:
+        TableRowSorter<TaskTableModel> filter = new TableRowSorter<>((TaskTableModel)taskTable.getModel());
+        taskTable.setRowSorter(filter);
+        switch(tableMode.getSelectedIndex()){
+            case 0: filter.setRowFilter(RowFilter.regexFilter("Pendente"));break;
+            case 1: filter.setRowFilter(RowFilter.regexFilter("Finalizada"));break;
+            case 2: filter.setRowFilter(null);
+        }
     }//GEN-LAST:event_tableModeActionPerformed
 
     private void deleteTaskButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteTaskButtonActionPerformed
