@@ -10,5 +10,5 @@ all:
 
 clean:
 	$(RM) TODO.jar
-	$(RM) *.class
+	cd TODO; $(RM) *.class
 
